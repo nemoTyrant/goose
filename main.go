@@ -191,10 +191,14 @@ func main() {
 	flag.StringVar(&newName, "n", "", "new name")
 	flag.Parse()
 
-	if !strings.HasSuffix(url, "m3u8") {
-		fmt.Println("please enter valid m3u8 url")
-		return
-	}
+        found, err := regexp.MatchString("m3u8($|\\?.*)", url)
+        if err != nil {
+                panic(err)
+        }
+        if !found {
+                fmt.Println("please enter valid m3u8 url")
+                return
+        }
 
 	// 1. 下载m3u8
 	filename, err := downloadM3U8(url)
