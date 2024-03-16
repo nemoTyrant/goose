@@ -51,7 +51,7 @@ func getUrls(prefix, filename string) ([]byte, []string, error) {
 	}
 
 	// 解析url
-	tsUrlRE := regexp.MustCompile(`.+ts\?start=.+`)
+	tsUrlRE := regexp.MustCompile(`.+\.ts.+`)
 	tsUrls := tsUrlRE.FindAllSubmatch(data, -1)
 	if len(tsUrls) == 0 {
 		return nil, nil, errors.New("failed to match ts urls")
